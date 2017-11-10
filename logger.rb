@@ -1,20 +1,17 @@
+require 'singleton'
+
 # new class
 class Logger
+  include Singleton
+
   def initialize
     @f = File.open 'log.txt', 'a'
-  end
-  # class variable
-  @@x = Logger.new
-
-  def self.instance
-  # retruns class var
-    @@x
   end
 
   # instance method
   def log_something(what)
     @f.puts what
+    # all changes writes on disk
+    @f.flush
   end
-
-  private_class_method :new
 end
